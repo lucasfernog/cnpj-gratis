@@ -20,14 +20,16 @@ class CnpjGratis {
 
         $cookie = $data['headers']['Set-Cookie'];
 
-        $image = self::request('http://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva/captcha/gerarCaptcha.asp', [], [
+        $image = self::request('http://www.receita.fazenda.gov.br/PessoaJuridica/CNPJ/cnpjreva/captcha/gerarCaptcha.asp', [], [
             "Pragma: no-cache",
+            "Cache-Control: no-cache",
+            "Upgrade-Insecure-Requests: 1",
             "Origin: http://www.receita.fazenda.gov.br",
             "Host: www.receita.fazenda.gov.br",
-            "User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0",
-            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3",
-            "Accept-Encoding: gzip, deflate",
+            "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.6,en;q=0.4",
+            "Accept-Encoding: gzip, deflate, sdch",
             "Referer: http://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva/cnpjreva_solicitacao2.asp",
             "Cookie: flag=1; $cookie",
             "Connection: keep-alive"
@@ -60,7 +62,7 @@ class CnpjGratis {
 
         $headers = [
             "Host: www.receita.fazenda.gov.br",
-            "User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0",
+            "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
             "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3",
             "Accept-Encoding: gzip, deflate",
@@ -161,7 +163,7 @@ class CnpjGratis {
                 }
             }
         }
-        
+
         if(isset($result['telefone']) && $result['telefone'] != '') {
             $posBarra = strpos($result['telefone'], '/');
             if ($posBarra > 0) {
